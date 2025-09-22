@@ -30,7 +30,7 @@ public class WimseKafkaConsumer {
         
         // Initialize Kafka consumer
         Properties props = new Properties();
-        props.put("bootstrap.servers", "localhost:9092");
+        props.put("bootstrap.servers", "localhost:33237");
         props.put("group.id", "wimse-demo-consumer");
         props.put("key.deserializer", StringDeserializer.class.getName());
         props.put("value.deserializer", StringDeserializer.class.getName());
