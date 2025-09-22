@@ -226,6 +226,7 @@ To make this production-ready, implement:
 3. **Topic Not Found**: Create the `orders` topic before running the demo
 4. **Key File Permissions**: Check that generated `*.pem` files are readable
 5. **JWT Parsing Errors**: Verify proper Base64 encoding and JSON structure
+6. **SLF4J Warning**: The "Failed to load StaticLoggerBinder" warning is harmless - add `slf4j-simple` dependency to eliminate it
 
 ### Debug Tips
 
@@ -233,6 +234,20 @@ To make this production-ready, implement:
 - Use `kafka-console-consumer.sh` to inspect message headers
 - Enable debug logging for JWT validation errors
 - Check generated key files exist and have proper format
+
+### Testing Without Kafka
+
+You can test key generation and JWT operations without Kafka:
+
+```bash
+# Test key generation
+java -cp target/classes:$(mvn dependency:build-classpath -q -Dmdep.outputFile=/dev/stdout) com.example.wimse.KeyPairGenerator test-workload
+
+# Check generated keys
+ls -la test-workload*.pem
+```
+
+The core cryptographic operations (key generation, JWT creation/parsing, public key extraction) will work independently of Kafka.
 
 ## Extension Points
 
